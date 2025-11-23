@@ -1,0 +1,15 @@
+D:\WindowsScanerSystem\WindowsScanerSystem\bin\Release\net10.0\WindowsScanerSystem.exe
+D:\WindowsScanerSystem\WindowsScanerSystem\bin\Release\net10.0\WindowsScanerSystem.dll.config
+D:\WindowsScanerSystem\WindowsScanerSystem\bin\Release\net10.0\WindowsScanerSystem.deps.json
+D:\WindowsScanerSystem\WindowsScanerSystem\bin\Release\net10.0\WindowsScanerSystem.runtimeconfig.json
+D:\WindowsScanerSystem\WindowsScanerSystem\bin\Release\net10.0\WindowsScanerSystem.dll
+D:\WindowsScanerSystem\WindowsScanerSystem\bin\Release\net10.0\WindowsScanerSystem.pdb
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\WindowsScanerSystem.GeneratedMSBuildEditorConfig.editorconfig
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\WindowsScanerSystem.AssemblyInfoInputs.cache
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\WindowsScanerSystem.AssemblyInfo.cs
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\WindowsScanerSystem.csproj.CoreCompileInputs.cache
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\WindowsScanerSystem.dll
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\refint\WindowsScanerSystem.dll
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\WindowsScanerSystem.pdb
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\WindowsScanerSystem.genruntimeconfig.cache
+D:\WindowsScanerSystem\WindowsScanerSystem\obj\Release\net10.0\ref\WindowsScanerSystem.dll
