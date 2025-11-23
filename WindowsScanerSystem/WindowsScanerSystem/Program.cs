@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using Razrabotka_Prog_APIandSDK.Windows.Notifications;
+//using System.Windows.Form;
 
 namespace MainConsoleServer
 {
@@ -54,6 +56,7 @@ namespace MainConsoleServer
     #region Основной класс программы
     public class Programm
     {
+        static Notifications notifications = new Notifications();
         #region Статические переменные
         static bool AktiveServer = false;                    // Флаг активности сервера
         static TcpListener _listener;                        // TCP listener для приема подключений
@@ -61,6 +64,7 @@ namespace MainConsoleServer
         static List<UserIp> _users = new List<UserIp>();     // Список пользователей
         static string NameServer = string.Empty;             // Имя сервера
         static string IpServer = string.Empty;               // IP адрес сервера
+        static string PortServer = string.Empty;               // IP адрес сервера
         static List<UserIp> userIp = new List<UserIp>();     // Дополнительный список пользователей
         #endregion
 
@@ -98,10 +102,10 @@ namespace MainConsoleServer
         #region Управление сервером
         static void ServerControl()
         {
-            //Console.Clear();
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("🔵 Сервер Активен!");
-            Console.WriteLine("Нажмите 'q' для остановки сервера");
+            Console.WriteLine($"Имя: [{NameServer}].  Server: [{IpServer}]:{PortServer}");
 
             Console.Write('\n');
             Console.WriteLine("========ПАНЕЛЬ  УПРАВЛЕИЯ=========");
@@ -110,7 +114,7 @@ namespace MainConsoleServer
             Console.WriteLine("==================================");
 
             Console.ForegroundColor = ConsoleColor.White;
-
+            Console.Write("\n\n");
             while (AktiveServer)
             {
                 if (Console.KeyAvailable)
@@ -147,6 +151,8 @@ namespace MainConsoleServer
                         Console.WriteLine("u - Открыть панель упровления пользователей");
                         Console.WriteLine("d - Открыть панель управления устройсвом");
                         Console.WriteLine("s - Открыть панель управления Сервера");
+                        Console.WriteLine("c - Очистить консоль");
+                        Console.WriteLine("t - проверка (отправит всем подлючённым устройсвам сообщение.)");
                     }
 
                     // Обработка команды информации о сервере (s/ы)
@@ -190,10 +196,46 @@ namespace MainConsoleServer
                             Console.WriteLine($"Не вышло обработать запрос.\n{ex.Message}");
                         }
                     }
-                    Console.Write('\n');
-                }
+                   
+                    // Обработка команды управления пользователями (с/с)
+                    if ((key.KeyChar == 'C' || key.KeyChar == 'c') || (key.KeyChar == 'С' || key.KeyChar == 'с'))
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("🔵 Сервер Активен!");
+                        Console.WriteLine($"Имя: [{NameServer}].  Server: [{IpServer}]:{PortServer}");
 
-                //  Thread.Sleep(100);
+                        Console.Write('\n');
+                        Console.WriteLine("========ПАНЕЛЬ  УПРАВЛЕИЯ=========");
+                        Console.WriteLine(" h [help / помощь] - Подсказка контроля ");
+                        Console.WriteLine(" q [quit / выйти] - Завершить работу сервера ");
+                        Console.WriteLine("==================================");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                    if((key.KeyChar == 'T' || key.KeyChar == 't') || (key.KeyChar == 'е' || key.KeyChar == 'Е'))
+                    { 
+                        string messageToSend = "meg -tmb standart";
+                        byte[] data = Encoding.UTF8.GetBytes(messageToSend);
+
+                        foreach (var client in _connectedClients.ToList())
+                        {
+                            if (client.Connected)
+                            {
+                                try
+                                {
+                                    NetworkStream stream = client.GetStream();
+                                    stream.Write(data, 0, data.Length);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine($"❌ Ошибка отправки: {ex.Message}");
+                                }
+                            }
+                        }
+                    }
+                }
+                //Thread.Sleep(100);
             }
         }
         #endregion
@@ -342,34 +384,51 @@ namespace MainConsoleServer
         #endregion
 
         #region Обработка сообщений
-        static void ReadMessege(string messege)
+        // Обработка команд от сервера
+        static void ProcessServerCommand(string command, string serverName)
         {
-            Console.WriteLine("> " + messege);
-            string[] strings = messege.Split(' ');
-            string ip = IpServer;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"\n📨 Команда от {serverName}: {command}");
+            Console.ForegroundColor = ConsoleColor.White;
 
-            // Обработка команды информации о сервере
-            if (strings[0] == "/Server")
+            // Разделяем команду на части
+            string[] commandParts = command.Trim().Split(' ');
+            
+
+            try
             {
-                Console.WriteLine("Команда /Server - информация о сервере");
-                // Здесь можно вывести статус сервера
+                if (commandParts[0] == "devaise")
+                {
+                    if (commandParts[1] == "-r")
+                    {
+
+                    }
+                    else if (commandParts[1] == "-g")
+                    {
+
+                    }
+                    else if (commandParts[1] == "-off")
+                    {
+
+                    }
+                }
+                else if (commandParts[0] == "meg") 
+                {
+                    if (commandParts[1] == "-tmb")
+                    {
+                        if (commandParts[2] == "standart")
+                        {
+                            notifications.Show("Сообщение для Админа, Устройсво в Сети!");
+                        }
+                    }
+                }
+
             }
-            // Обработка команды настроек
-            else if (strings[0] == "/Setengs")
+            catch (Exception ex)
             {
-                Console.WriteLine("Команда /Setengs - настройки");
-            }
-            // Обработка команды пользователей сервера
-            else if (strings[0] == "/Server-User")
-            {
-                Console.WriteLine("Команда /Server-User - пользователи сети");
-            }
-            // Неизвестная команда
-            else
-            {
-                Console.WriteLine($"{strings[0]} - не верная каманда.");
-                Console.WriteLine($"Или");
-                Console.WriteLine($"{ip} - Сеть не смогла считать комнажу {strings[0]}");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"❌ Ошибка выполнения команды: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
         #endregion
@@ -392,7 +451,7 @@ namespace MainConsoleServer
 
             string _localIp = GetLocalIPAddress();
             IpServer = _localIp;
-
+            PortServer = port.ToString();
             try
             {
                 _listener = new TcpListener(IPAddress.Parse(_localIp), port);
@@ -486,7 +545,7 @@ namespace MainConsoleServer
                             client.Close();
                             Console.WriteLine($"🔌 Клиент отключен: {user.Name}");
                         }
-                        ReadMessege(message);
+ 
                     }
                 }
             }
@@ -552,6 +611,7 @@ namespace MainConsoleServer
         #endregion
 
         #region Подключение пользователя
+        #region Подключение пользователя (Только прослушивание)
         static void UserConectin()
         {
             Console.Clear();
@@ -589,30 +649,187 @@ namespace MainConsoleServer
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"\n⚠️  Пользователь запрашивает разрешение на подключение к серверу");
             Console.WriteLine($"   Сервер: {NameServer} ({IpServer}:{port})");
-            AttemptConnection(IpServer, port, NameServer);
             Console.ForegroundColor = ConsoleColor.White;
 
-            Console.WriteLine("\nВыберите действие:");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Y - Разрешить подключение");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("N - Запретить подключение");
-            Console.ForegroundColor = ConsoleColor.White;
-
-            Console.WriteLine("\nНажмите q - для завершения.");
+            Console.WriteLine("\nНажмите любую клавишу для начала подключения...");
             Console.ReadKey();
 
-            ConsoleKeyInfo keyInfo = Console.ReadKey();
-            Console.WriteLine(); // Переход на новую строку
+            // ЗАПУСКАЕМ ПРОСЛУШИВАНИЕ СИНХРОННО, ЧТОБЫ МЕТОД НЕ ЗАВЕРШИЛСЯ
+            StartListeningMode(IpServer, port, NameServer).Wait(); // Добавляем .Wait() для ожидания завершения
+        }
 
-            if (keyInfo.Key == ConsoleKey.Q)
+        // Режим ТОЛЬКО прослушивания (без отправки сообщений)
+        static async Task StartListeningMode(string ip, int port, string serverName) // Меняем void на Task
+        {
+            try
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("✅ Подключение разрешено!");
+                Console.WriteLine($"\n🔄 Подключение к {ip}:{port}...");
+                Console.WriteLine("📡 Режим: ТОЛЬКО ПРОСЛУШИВАНИЕ");
+                Console.WriteLine("⏹️  Для остановки нажмите 'Q'\n");
+
+                using (TcpClient client = new TcpClient())
+                {
+                    // Подключаемся к серверу
+                    await client.ConnectAsync(ip, port);
+
+                    if (client.Connected)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"✅ Успешно подключено к серверу: {serverName}");
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        NetworkStream stream = client.GetStream();
+
+                        // Запускаем прослушивание команд от сервера
+                        await ListenForServerCommands(stream, serverName);
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("❌ Не удалось подключиться к серверу");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"❌ Ошибка подключения: {ex.Message}");
                 Console.ForegroundColor = ConsoleColor.White;
-                // Здесь будет код для фактического подключения к серверу
+            }
+
+            Console.WriteLine("\nНажмите любую клавишу для возврата в меню...");
+            Console.ReadKey();
+        }
+
+        // Прослушивание команд ТОЛЬКО от сервера
+        static async Task ListenForServerCommands(NetworkStream stream, string serverName)
+        {
+            byte[] buffer = new byte[4096];
+            bool isListening = true;
+
+            // Запускаем фоновую задачу для отслеживания клавиши выхода
+            var exitTask = Task.Run(() =>
+            {
+                while (isListening)
+                {
+                    if (Console.KeyAvailable)
+                    {
+                        var key = Console.ReadKey(true);
+                        if (key.Key == ConsoleKey.Q)
+                        {
+                            isListening = false;
+                            break;
+                        }
+                    }
+                    Thread.Sleep(100);
+                }
+            });
+
+            try
+            {
+                while (isListening && stream.CanRead)
+                {
+                    // Ожидаем данные от сервера
+                    if (stream.DataAvailable)
+                    {
+                        int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+                        if (bytesRead == 0) break;
+
+                        string command = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                        ProcessServerCommand(command, serverName);
+                    }
+
+                    // Небольшая задержка для уменьшения нагрузки на CPU
+                    await Task.Delay(100);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"❌ Ошибка получения команд: {ex.Message}");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            finally
+            {
+                isListening = false;
+                Console.WriteLine("\n🔌 Отключено от сервера");
             }
         }
+        #region Реализация команд
+        static void ExecuteShutdown()
+        {
+            Console.WriteLine("🔄 Выполнение: Выключение компьютера...");
+            // System.Diagnostics.Process.Start("shutdown", "/s /t 0");
+        }
+
+        static void ExecuteRestart()
+        {
+            Console.WriteLine("🔄 Выполнение: Перезагрузка компьютера...");
+            // System.Diagnostics.Process.Start("shutdown", "/r /t 0");
+        }
+
+        static void ExecuteLock()
+        {
+            Console.WriteLine("🔒 Выполнение: Блокировка компьютера...");
+            // System.Diagnostics.Process.Start("rundll32.exe", "user32.dll,LockWorkStation");
+        }
+
+        static void ShowMessage(string message)
+        {
+            Console.WriteLine($"💬 Сообщение: {message}");
+            // Можно добавить вывод в MessageBox для Windows Forms
+            // MessageBox.Show(message, "Сообщение от сервера");
+        }
+
+        static void SendDeviceStatus()
+        {
+            // Здесь можно собрать и отправить статус устройства
+            string status = $"Устройство: {Environment.MachineName}\n" +
+                           $"ОС: {Environment.OSVersion}\n" +
+                           $"Пользователь: {Environment.UserName}\n" +
+                           $"Время: {DateTime.Now:HH:mm:ss}";
+
+            Console.WriteLine($"📊 Отправка статуса устройства:\n{status}");
+        }
+
+        static void ExecuteProgram(string programPath)
+        {
+            Console.WriteLine($"🚀 Запуск программы: {programPath}");
+            try
+            {
+                // System.Diagnostics.Process.Start(programPath);
+                Console.WriteLine($"✅ Программа запущена: {programPath}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Ошибка запуска: {ex.Message}");
+            }
+        }
+        #endregion
+
+        // Метод для логирования подключений (опционально)
+        static void LogConnectionAttempt(string ip, int port, string serverName, string status)
+        {
+            try
+            {
+                string logDirectory = @"D:\WindowsScanerSystem\WindowsScanerSystem\Logs";
+                string logFile = Path.Combine(logDirectory, "client_connection_log.txt");
+
+                if (!Directory.Exists(logDirectory))
+                {
+                    Directory.CreateDirectory(logDirectory);
+                }
+
+                string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | Сервер: {serverName} | IP: {ip}:{port} | Статус: {status}";
+                File.AppendAllText(logFile, logEntry + Environment.NewLine);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"⚠️ Не удалось записать в лог: {ex.Message}");
+            }
+        }
+        #endregion
 
         // Метод для попытки подключения к серверу
         static async void AttemptConnection(string ip, int port, string serverName)
@@ -672,32 +889,6 @@ namespace MainConsoleServer
 
                 // Логирование ошибки подключения
                 LogConnectionAttempt(ip, port, serverName, $"ERROR: {ex.Message}");
-            }
-        }
-
-        // Метод для логирования попыток подключения
-        static void LogConnectionAttempt(string ip, int port, string serverName, string status)
-        {
-            try
-            {
-                string logDirectory = @"D:\WindowsScanerSystem\WindowsScanerSystem\Logs";
-                string logFile = Path.Combine(logDirectory, "connection_log.txt");
-
-                // Создаем директорию если ее нет
-                if (!Directory.Exists(logDirectory))
-                {
-                    Directory.CreateDirectory(logDirectory);
-                }
-
-                // Записываем в лог
-                string logEntry = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} | Сервер: {serverName} | IP: {ip}:{port} | Статус: {status}";
-                File.AppendAllText(logFile, logEntry + Environment.NewLine);
-
-                Console.WriteLine($"📝 Запись добавлена в лог: {logFile}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"⚠️ Не удалось записать в лог: {ex.Message}");
             }
         }
         #endregion
