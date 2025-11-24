@@ -18,4 +18,4 @@
 ## 🛠️ Установка
 
 
-[Класический, для Windows устройсв:](https://github.com/R0ma4/Console_Local_Server/tree/Csharp-Version)
+[Класический, для Windows устройсв (Консоль)](https://github.com/R0ma4/Console_Local_Server/tree/Csharp-Version)
