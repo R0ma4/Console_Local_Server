@@ -1,0 +1,337 @@
+﻿<Window x:Class="WpfServerControlDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfServerControlDesktop"
+        mc:Ignorable="d"
+        x:Name="WindowProgramm"
+        Title="MainWindow" Height="650" Width="600">
+    <Grid>
+        <Border Background="#FF656565">
+            <Grid>
+                <TextBlock x:Name="MainTextLocalServer" Text="Локальный сервер (визуальная версия)" Margin="0,12,0,0" Foreground="White" FontSize="28" FontFamily="Bahnschrift Condensed" HorizontalAlignment="Center" Height="44" VerticalAlignment="Top"/>
+                <TabControl Margin="0,50,0,0">
+                    <TabItem Header="Сервер" FontSize="14">
+                        <Grid Background="#FFF5F5F5">
+                            <Grid x:Name="GridServerAktive" Background="#FFE5E5E5" Visibility="Collapsed" >
+                                <TextBlock x:Name="StatusUserServer" Text="Сервер: Активен" FontFamily="Bahnschrift Condensed" FontSize="48" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,22,0,0"/>
+                                <TextBlock x:Name="StatusInfoUserServer" Text="119.223.12.1:411" FontFamily="Bahnschrift Condensed" FontSize="48" Margin="0,84,0,0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            </Grid>
+
+                            <Grid x:Name="GridServerCreate" Visibility="Collapsed" Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Имя сервера -->
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,15">
+                                    <TextBlock x:Name="CreateServerName" 
+                          Text="Имя сервера:" 
+                          FontSize="14" 
+                          FontWeight="SemiBold"
+                          Width="180"
+                          VerticalAlignment="Center"/>
+                                    <TextBox x:Name="UserCreateServerName" 
+                        Text="" 
+                        Width="250" 
+                        Height="32"
+                        FontSize="14"
+                        VerticalAlignment="Center"
+                        Padding="8,4"
+                        BorderThickness="1"
+                        BorderBrush="#FFCCCCCC"
+                        Background="White"/>
+                                </StackPanel>
+
+                                <!-- IP адрес -->
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,15">
+                                    <TextBlock x:Name="CreateServerIp" 
+                          Text="IP адрес:" 
+                          FontSize="14"
+                          FontWeight="SemiBold"
+                          Width="180"
+                          VerticalAlignment="Center"/>
+                                    <TextBox x:Name="UserCreateServerIp" 
+                        Text="192.168.0.0" 
+                        Width="150" 
+                        Height="32"
+                        FontSize="14"
+                        VerticalAlignment="Center"
+                        Padding="8,4"
+                        BorderThickness="1"
+                        BorderBrush="#FFCCCCCC"
+                        Background="White"
+                        HorizontalAlignment="Left"/>
+                                </StackPanel>
+
+                                <!-- Версия IP -->
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,15">
+                                    <TextBlock x:Name="CreateServerIpVtext" 
+                          Text="Версия IP:" 
+                          FontSize="14"
+                          FontWeight="SemiBold"
+                          Width="180"
+                          VerticalAlignment="Center"/>
+                                    <ComboBox Width="120" 
+                         Height="32"
+                         SelectedIndex="0" 
+                         FontSize="14"
+                         VerticalAlignment="Center"
+                         Padding="4"
+                         BorderThickness="1"
+                         BorderBrush="#FFCCCCCC"
+                         Background="White">
+                                        <ComboBoxItem Content="IPv4"/>
+                                        <ComboBoxItem Content="IPv5"/>
+                                        <ComboBoxItem Content="IPv6"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <!-- Порт сервера -->
+                                <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,20">
+                                    <TextBlock x:Name="CreateServerIpPort"  Text="Порт сервера:"   FontSize="14"   FontWeight="SemiBold"   Width="180" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="UserCreateServerPort" Text="" Width="100" Height="32" FontSize="14"  VerticalAlignment="Center"  Padding="8,4" BorderThickness="1" BorderBrush="#FFCCCCCC" Background="White"/>
+                                </StackPanel>
+
+                                <!-- Настройка паролей (в Expander) -->
+                                <Expander Grid.Row="4" 
+                     Header="Настройка паролей" 
+                     FontSize="14"
+                     FontWeight="SemiBold"
+                     Margin="0,0,0,20"
+                     Padding="10"
+                     BorderThickness="1"
+                     BorderBrush="#FFDDDDDD"
+                     Background="White">
+                                    <StackPanel Orientation="Vertical" Margin="10">
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                            <TextBlock Text="Пароль:" 
+                                  Width="120"
+                                  VerticalAlignment="Center"
+                                  FontSize="13"/>
+                                            <PasswordBox x:Name="UserCreateServerPassword" 
+                                    Password="" 
+                                    Width="200" 
+                                    Height="28"
+                                    FontSize="14"
+                                    VerticalAlignment="Center"
+                                    BorderThickness="1"
+                                    BorderBrush="#FFCCCCCC"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Подтверждение:" 
+                                  Width="120"
+                                  VerticalAlignment="Center"
+                                  FontSize="13"/>
+                                            <PasswordBox x:Name="UserCreateServerPasswordCheck" Width="200"    Height="28"    FontSize="14"  VerticalAlignment="Center" BorderThickness="1" BorderBrush="#FFCCCCCC"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Expander>
+
+                                <!-- Кнопка -->
+                                <Button Grid.Row="5" x:Name="BtnOpenLocalServer"  Content="Открыть локальный сервер"  FontSize="14" FontWeight="SemiBold"  Height="40"   Width="280" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="#FF0078D7" Foreground="White" BorderThickness="0" Padding="20,8"    Cursor="Hand" Click="StartServer">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Effect>
+                                        <DropShadowEffect BlurRadius="4" Opacity="0.2" ShadowDepth="2"/>
+                                    </Button.Effect>
+                                </Button>
+                            </Grid>
+
+                            <Grid x:Name="GridServerConect" Visibility="Collapsed" Margin="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- Имя сервера -->
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,15">
+                                    <TextBlock x:Name="ConectServerName" 
+     Text="Имя сервера:" 
+     FontSize="14" 
+     FontWeight="SemiBold"
+     Width="180"
+     VerticalAlignment="Center"/>
+                                    <TextBox x:Name="UserConectServerName" 
+   Text="" 
+   Width="250" 
+   Height="32"
+   FontSize="14"
+   VerticalAlignment="Center"
+   Padding="8,4"
+   BorderThickness="1"
+   BorderBrush="#FFCCCCCC"
+   Background="White"/>
+                                </StackPanel>
+
+                                <!-- IP адрес -->
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,15">
+                                    <TextBlock x:Name="ConectServerIp" 
+     Text="IP адрес:" 
+     FontSize="14"
+     FontWeight="SemiBold"
+     Width="180"
+     VerticalAlignment="Center"/>
+                                    <TextBox x:Name="UserConectServerIp" 
+   Text="192.168.0.0" 
+   Width="150" 
+   Height="32"
+   FontSize="14"
+   VerticalAlignment="Center"
+   Padding="8,4"
+   BorderThickness="1"
+   BorderBrush="#FFCCCCCC"
+   Background="White"
+   HorizontalAlignment="Left"/>
+                                </StackPanel>
+
+                                <!-- Версия IP -->
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,15">
+                                    <TextBlock x:Name="ConectServerIpVtext" 
+     Text="Версия IP:" 
+     FontSize="14"
+     FontWeight="SemiBold"
+     Width="180"
+     VerticalAlignment="Center"/>
+                                    <ComboBox Width="120" 
+    Height="32"
+    SelectedIndex="0" 
+    FontSize="14"
+    VerticalAlignment="Center"
+    Padding="4"
+    BorderThickness="1"
+    BorderBrush="#FFCCCCCC"
+    Background="White">
+                                        <ComboBoxItem Content="IPv4"/>
+                                        <ComboBoxItem Content="IPv5"/>
+                                        <ComboBoxItem Content="IPv6"/>
+                                    </ComboBox>
+                                </StackPanel>
+
+                                <!-- Порт сервера -->
+                                <StackPanel Grid.Row="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,20">
+                                    <TextBlock x:Name="ConectServerIpPort"  Text="Порт сервера:"   FontSize="14"   FontWeight="SemiBold"   Width="180" VerticalAlignment="Center"/>
+                                    <TextBox x:Name="UserConectServerPort" Text="" Width="100" Height="32" FontSize="14"  VerticalAlignment="Center"  Padding="8,4" BorderThickness="1" BorderBrush="#FFCCCCCC" Background="White"/>
+                                </StackPanel>
+
+                                <!-- Настройка паролей (в Expander) -->
+                                <Expander Grid.Row="4" 
+Header="Настройка паролей" 
+FontSize="14"
+FontWeight="SemiBold"
+Margin="0,0,0,20"
+Padding="10"
+BorderThickness="1"
+BorderBrush="#FFDDDDDD"
+Background="White">
+                                    <StackPanel Orientation="Vertical" Margin="10">
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                            <TextBlock Text="Пароль:" 
+             Width="120"
+             VerticalAlignment="Center"
+             FontSize="13"/>
+                                            <PasswordBox x:Name="UserConectServerPassword" 
+               Password="" 
+               Width="200" 
+               Height="28"
+               FontSize="14"
+               VerticalAlignment="Center"
+               BorderThickness="1"
+               BorderBrush="#FFCCCCCC"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Подтверждение:" 
+             Width="120"
+             VerticalAlignment="Center"
+             FontSize="13"/>
+                                            <PasswordBox x:Name="UserConectServerPasswordCheck" Width="200"    Height="28"    FontSize="14"  VerticalAlignment="Center" BorderThickness="1" BorderBrush="#FFCCCCCC"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Expander>
+
+                                <!-- Кнопка -->
+                                <Button Grid.Row="5" x:Name="BtnConectLocalServer"  Content="Подключиться к локальному серверу"  FontSize="14" FontWeight="SemiBold"  Height="40"   Width="280" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="#FF0078D7" Foreground="White" BorderThickness="0" Padding="20,8"    Cursor="Hand" Click="ConectServer">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Effect>
+                                        <DropShadowEffect BlurRadius="4" Opacity="0.2" ShadowDepth="2"/>
+                                    </Button.Effect>
+                                </Button>
+                            </Grid>
+
+                            <Grid x:Name="BtnOpenGridCreateServerNavigator" Visibility="Visible"  >
+                                <TextBlock x:Name="TextBlockError" Text="Ошибка настройки программы" FontFamily="Segoe UI Black" FontSize="15" Margin="0,1,0,405" TextAlignment="Center" LineHeight="6" TextWrapping="Wrap"/>
+
+                                <Button x:Name="BtnOpenGridCreateServer"  Content="Открыть локальный сервер"  FontSize="14" FontWeight="SemiBold"  Height="40"   Width="280" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="#FF0078D7" Foreground="White" BorderThickness="0" Padding="20,8" Cursor="Hand" Click="NavigatorBtn" Margin="150,150,150,150">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Effect>
+                                        <DropShadowEffect BlurRadius="4" Opacity="0.2" ShadowDepth="2"/>
+                                    </Button.Effect>
+                                </Button>
+                                <Button x:Name="BtnOpenGridConectServer"  Content="Подключиться к серверу"  FontSize="14" FontWeight="SemiBold"  Height="40"   Width="280" HorizontalAlignment="Left"  VerticalAlignment="Top" Background="#FFBDBDBD" Foreground="White" BorderThickness="0" Padding="20,8" Cursor="Hand" Click="NavigatorBtn" Margin="150,204,0,0">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Effect>
+                                        <DropShadowEffect BlurRadius="4" Opacity="0.2" ShadowDepth="2"/>
+                                    </Button.Effect>
+                                </Button>
+                            </Grid>
+
+                            <Grid x:Name="PageConnectUser" Visibility="Collapsed"  >
+                                <TextBlock Text="Вы подключены!" FontSize="72" Margin="0,140,0,310"/>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem x:Name="ConectionDevaise" Header="Подключённые устройсва" Visibility="Collapsed">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem x:Name="ComandPage" Header="Комнады серверу" Visibility="Collapsed">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem x:Name="DevaiseAndList" Header="Состояния устройсв и чёрные списки" Visibility="Collapsed">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                    <TabItem x:Name="Log" Header="Log" Visibility="Collapsed">
+                        <Grid Background="#FFE5E5E5"/>
+                    </TabItem>
+                </TabControl>
+
+            </Grid>
+        </Border>
+        <Border Height="120" Background="#FF5A5A5A" VerticalAlignment="Bottom">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12">
+                    <TextBlock Text="@RazProg" Foreground="White" Margin="3"/>
+                    <TextBlock Text="Версия: альфа 0.0.1" Foreground="White" Margin="3" />
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="12">
+                    <TextBlock Text="GitHub Программы" Foreground="White" Margin="3" />
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,78 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5B506CCA-AA91-4E1A-B938-EC2F1C015CC5}|WpfServerControlDesktop\\WpfServerControlDesktop.csproj|d:\\wdserver\\console_local_server\\wpfservercontroldesktop\\wpfservercontroldesktop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B506CCA-AA91-4E1A-B938-EC2F1C015CC5}|WpfServerControlDesktop\\WpfServerControlDesktop.csproj|solutionrelative:wpfservercontroldesktop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B506CCA-AA91-4E1A-B938-EC2F1C015CC5}|WpfServerControlDesktop\\WpfServerControlDesktop.csproj|D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\wpfservercontroldesktop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{5B506CCA-AA91-4E1A-B938-EC2F1C015CC5}|WpfServerControlDesktop\\WpfServerControlDesktop.csproj|solutionrelative:wpfservercontroldesktop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B506CCA-AA91-4E1A-B938-EC2F1C015CC5}|WpfServerControlDesktop\\WpfServerControlDesktop.csproj|d:\\wdserver\\console_local_server\\wpfservercontroldesktop\\wpfservercontroldesktop\\moduls\\audeomoduls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5B506CCA-AA91-4E1A-B938-EC2F1C015CC5}|WpfServerControlDesktop\\WpfServerControlDesktop.csproj|solutionrelative:wpfservercontroldesktop\\moduls\\audeomoduls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AudeoModuls.cs",
+              "DocumentMoniker": "D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\WpfServerControlDesktop\\Moduls\\AudeoModuls.cs",
+              "RelativeDocumentMoniker": "WpfServerControlDesktop\\Moduls\\AudeoModuls.cs",
+              "ToolTip": "D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\WpfServerControlDesktop\\Moduls\\AudeoModuls.cs",
+              "RelativeToolTip": "WpfServerControlDesktop\\Moduls\\AudeoModuls.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwA0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T10:40:33.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\WpfServerControlDesktop\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "WpfServerControlDesktop\\MainWindow.xaml",
+              "ToolTip": "D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\WpfServerControlDesktop\\MainWindow.xaml",
+              "RelativeToolTip": "WpfServerControlDesktop\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-12-05T17:42:44.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\WpfServerControlDesktop\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "WpfServerControlDesktop\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\WDServer\\Console_Local_Server\\WpfServerControlDesktop\\WpfServerControlDesktop\\MainWindow.xaml.cs",
+              "RelativeToolTip": "WpfServerControlDesktop\\MainWindow.xaml.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAA2wEsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T17:42:43.335Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
